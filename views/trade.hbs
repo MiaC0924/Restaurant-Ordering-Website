@@ -1,0 +1,20 @@
+ <div >
+   <form  method="post" class="form-inline">
+    <div>{{trader1}}</div>
+    <input style="display:none;" name="trader1name" value="{{trader1}}">
+    {{#each cards}}
+      <input style="display:inline;" type="checkbox" id="{{this._id}}" name="trader1" value="{{this.name}}">
+      <a  style="display:inline;" href="/card/{{this._id}}">{{this.name}}</a><br>
+    {{/each}}
+
+
+    <div>{{trader2}}</div>
+        <input style="display:none;" name="trader2name" value="{{trader2}}">
+    {{#each othercards}}
+      <input style="display:inline;" type="checkbox" id="{{this._id}}" name="trader2" value="{{this.name}}">
+      <a  style="display:inline;" href="/card/{{this._id}}">{{this.name}}</a><br>
+    {{/each}}
+
+     <button type="submit" formaction="/users/trade">Trade</button>
+    </form>
+ </div>

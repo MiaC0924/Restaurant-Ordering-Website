@@ -1,0 +1,12 @@
+    <h4>Add Friend:</h4>
+          <form  action="/users" method="get" class="form-inline">
+            <input  type="search" id="name" name="name" placeholder="Search">
+            <button type="submit">Search</button>
+          </form>
+        {{#each users}}
+          <form method="post">
+            <a  href="/users/{{this._id}}">{{this.name}}</a>
+            <input style="display:none" type = "text" name="id" value = "{{this._id}}">
+            <button type="submit" formaction="/users/adduser">Add</button>
+          </form>
+        {{/each}}

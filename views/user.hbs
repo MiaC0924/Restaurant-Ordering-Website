@@ -1,0 +1,72 @@
+<h1>Profile for {{username}}</h1>
+
+<a style="display:inline;" href="/logout">Logout</a><br>
+<meta http-equiv="refresh" content="10" >
+<div>
+  <div style="float:left;">
+    <table>
+      <tr>
+        <td>
+          <h4>{{username}}'s Cards</h4>
+          {{#each cards}}
+              <a  href="/card/{{this._id}}">{{this.name}}</a><br>
+          {{/each}}
+        </td>
+        <td>
+          <h4>{{username}}'s Friends</h4>
+          {{#each friends}}
+              <a>{{this}}</a><br>
+          {{/each}}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h4>Pending Trade Requests:</h4>
+          {{#each trade}}
+              <a href="/tradecard/{{this._id}}">{{this.name}}</a><br>
+          {{/each}}
+        </td>    
+        <td>
+          <h4>Propose a Trade:</h4>
+          Select user to add to the trade:
+          <div >
+              <form  action="/users/tradetofriends" method="post" class="form-inline">
+              <select name="select" id="selector" onchange="this.form.submit()">
+                  <option disabled selected value> -- select an User -- </option>
+                  {{#each friends}}
+                    <option value="{{this}}">{{this}}</option>
+                  {{/each}}
+              </select>
+              </form>
+          </div>
+        </td>
+      </tr> 
+    </table>
+  </div>
+
+  <div style="float:left;">
+    <h4>Add Friend:</h4>
+          <form  action="/users" method="get" class="form-inline">
+            <input  type="search" id="name" name="name" placeholder="Search">
+            <button type="submit">Search</button>
+          </form>
+        {{#each users}}
+          <form method="post">
+            <a  href="/users/{{this._id}}">{{this.name}}</a>
+            <input style="display:none" type = "text" name="id" value = "{{this._id}}">
+            <button type="submit" formaction="/users/adduser">Add</button>
+          </form>
+        {{/each}}
+
+    <h4>Pending Friend Requests:</h4>
+      {{#each pending}}
+          <form method="post">
+            {{this}}
+             <input style="display:none" type = "text" name="name" value = "{{this}}">
+            <button type="submit" formaction="/users/accept">accept</button>
+            <button type="submit" formaction="/users/reject">reject</button>
+            <br>
+          </form>
+      {{/each}}
+  </div>
+</div>
